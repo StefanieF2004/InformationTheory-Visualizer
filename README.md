@@ -107,19 +107,38 @@ Below are key screenshots showcasing all 4 algorithms supported by the applicati
 
 ### 1. Shannon-Fano Code Visualization
 Recursive top-down splitting and tree generation.  
-![Shannon-Fano Code](images/shannon-fano.png)
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/09811f98-9819-43d9-a85a-956134280b63" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/cc103f4c-3a0a-44c0-a8cd-0767ab855250" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/5d871438-ca84-47aa-b4cf-1ab21ac51163" />
+...
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/5ce2f9e2-2f36-49a4-9c9e-57026f8231eb" />
+
 
 ### 2. Huffman Algorithm Visualization
 Bottom-up tree construction with optimal merging.  
-![Huffman Algorithm](images/huffman.png)
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/930fab40-1f39-4378-9921-0f61efa122d1" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/cc94cdd8-d69b-4f22-b844-3225e60adf89" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/fb535de9-08c4-48fd-afe7-25316782afe6" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/4f200b37-4e28-4215-99d5-0fc4b78e730f" />
+...
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/63679027-3c29-48e6-8fed-c59b109d6bb2" />
+
 
 ### 3. Shannon Binary Code Visualization
 Cumulative probability arithmetic and fractional binary conversion.  
-![Shannon Binary Code](images/shannon-binary.png)
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/b4b86c78-552f-447c-a622-98592d69aba4" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/c52eb9b2-3fcf-4ea1-9e62-5d4af433dac1" />
+...
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/b33384b9-d574-421b-bf6d-db7d6ca15aaa" />
+
 
 ### 4. Gilbert-Moore Code Visualization
 Alphabetical order-preserving arithmetic coding.  
-![Gilbert-Moore Code](images/gilbert-moore.png)
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/5764b817-f9d3-4f52-b231-be8b53cdaebb" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/2ad21e21-9dea-457f-8552-b8c7b9ffca04" />
+...
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/a022dc9e-dc42-416f-b492-c489a1bb2ee3" />
+
 
 ---
 
