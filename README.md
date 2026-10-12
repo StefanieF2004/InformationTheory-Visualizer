@@ -12,7 +12,6 @@ An interactive, desktop-based educational Java application designed to visualize
 5. [Software Architecture & Core Classes](#-software-architecture--core-classes)
 6. [User Interface & Visual Demonstrations](#-user-interface--visual-demonstrations)
 7. [Installation & Execution](#-installation--execution)
-8. [Author & Academic Context](#-author--academic-context)
 
 ---
 
