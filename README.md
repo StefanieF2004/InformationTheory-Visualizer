@@ -73,91 +73,59 @@ The application evaluates generated codewords using fundamental concepts from In
 
 Let a discrete memoryless source be represented by:
 
-\[
-X = \{x_1,x_2,\ldots,x_N\}
-\]
+$$X = \{x_1, x_2, \ldots, x_N\}$$
 
 with probability distribution:
 
-\[
-P = \{p_1,p_2,\ldots,p_N\}
-\]
+$$P = \{p_1, p_2, \ldots, p_N\}$$
 
 where:
 
-\[
-\sum_{i=1}^{N}p_i=1
-\]
+$$\sum_{i=1}^{N} p_i = 1$$
 
-### 1. Source Entropy H(X)
+### 1. Source Entropy $H(X)$
 
 Source entropy measures the average information produced by a source.
 
 For a binary source coding system, entropy is defined as:
 
-\[
-H(X)=-\sum_{i=1}^{N}p_i\log_2(p_i)
-\]
+$$H(X) = -\sum_{i=1}^{N} p_i \log_2(p_i)$$
 
-More generally, entropy measured in base-b units is:
+More generally, entropy measured in base-$b$ units is:
 
-\[
-H_b(X)=-\sum_{i=1}^{N}p_i\log_b(p_i)
-\]
+$$H_b(X) = -\sum_{i=1}^{N} p_i \log_b(p_i)$$
 
-where \(b\) is the coding alphabet size.
+where $b$ is the coding alphabet size.
 
 For zero-probability symbols, the entropy contribution is conventionally defined as zero.
 
-### 2. Average Codeword Length L
+### 2. Average Codeword Length $L$
 
 The average codeword length represents the expected number of code symbols required to encode a source symbol.
 
-For a binary code:
+For a code:
 
-\[
-L=\sum_{i=1}^{N}p_i n_i
-\]
+$$L = \sum_{i=1}^{N} p_i n_i$$
 
 where:
-- \(p_i\) is the probability of source symbol \(x_i\).
-- \(n_i\) is the length of its assigned codeword.
+- $p_i$ is the probability of source symbol $x_i$.
+- $n_i$ is the length of its assigned codeword.
 
-For a b-ary code, the same expression measures the expected number of code symbols, with each code symbol carrying up to \(\log_2(b)\) bits.
+### 3. Coding Efficiency $\eta$
 
-### 3. Coding Efficiency η
+Coding efficiency evaluates how effectively the code utilizes the available code alphabet of size $b$. As implemented in the application, efficiency is calculated as:
 
-For a code whose average length is measured in b-ary code symbols, coding efficiency can be expressed as:
+$$\eta = \frac{H_2(X)}{L \log_2(b)} \times 100\%$$
 
-\[
-\eta=\frac{H_b(X)}{L}\times100\%
-\]
+For binary coding where $b = 2$, this simplifies to:
 
-Equivalently, when entropy is measured in bits:
+$$\eta = \frac{H_2(X)}{L} \times 100\%$$
 
-\[
-\eta=\frac{H_2(X)}{L\log_2(b)}\times100\%
-\]
-
-For binary coding, \(b=2\), so the expression simplifies to:
-
-\[
-\eta=\frac{H_2(X)}{L}\times100\%
-\]
-
-The application displays entropy, average codeword length, and efficiency based on its implemented calculations.
-
-**Note:** The current implementation uses binary logarithms to calculate entropy. Its efficiency formula uses the selected base value, so the interpretation of the results is most straightforward when the selected base is 2.
-
-### 4. Coding Redundancy R
+### 4. Coding Redundancy $R$
 
 Coding redundancy can be defined as the difference between 100% efficiency and the calculated efficiency:
 
-\[
-R=100\%-\eta
-\]
-
-This expresses the percentage difference from the ideal efficiency under this definition.
+$$R = 100\% - \eta$$
 
 ---
 
@@ -170,16 +138,11 @@ This expresses the percentage difference from the ideal efficiency under this de
 The Shannon-Fano algorithm constructs a binary code tree by repeatedly dividing a sorted set of source symbols into two groups.
 
 Procedure:
-
 1. Sort source symbols in descending order of probability.
 2. Calculate the total probability of the current group.
 3. Find a division that minimizes the absolute difference between the probabilities of the two resulting groups.
 4. Assign bit `0` to the left group and bit `1` to the right group.
 5. Repeat the process recursively until each group contains a single symbol.
-
-The codeword for each symbol is obtained by concatenating the bits assigned along its path through the tree.
-
-The application visualizes the recursive partitions and displays the mathematical calculations for each division.
 
 ### 2. Huffman Coding
 
@@ -188,25 +151,16 @@ The application visualizes the recursive partitions and displays the mathematica
 Huffman coding generates a prefix code by repeatedly combining nodes with the smallest probabilities.
 
 Procedure:
-
 1. Create an initial forest containing one leaf node for each source symbol.
 2. Sort the nodes in ascending order of probability.
-3. Select up to \(b\) nodes with the smallest probabilities.
+3. Select up to $b$ nodes with the smallest probabilities.
 4. Combine them into a parent node whose probability equals the sum of the child probabilities.
 5. Repeat until a single root node remains.
 6. Traverse the tree to assign codewords to the source symbols.
 
-**Multi-ary support:** The implementation accepts a coding base \(b\) and adds zero-probability dummy nodes when necessary to satisfy the tree construction condition:
+**Multi-ary support:** The implementation accepts a coding base $b$ and adds zero-probability dummy nodes when necessary to satisfy the tree construction condition:
 
-\[
-(N-1)\bmod(b-1)=0
-\]
-
-This condition ensures that a full b-ary Huffman tree can be constructed using the available leaves.
-
-For binary Huffman coding, \(b=2\), and each internal node combines two children.
-
-The application visualizes intermediate forests, node merging, and the final coding tree.
+$$(N - 1) \bmod (b - 1) = 0$$
 
 ### 3. Shannon Binary Coding
 
@@ -216,27 +170,15 @@ The Shannon binary coding procedure uses cumulative probabilities to determine c
 
 First, calculate the codeword length:
 
-\[
-n_i=\left\lceil-\log_2(p_i)\right\rceil
-\]
+$$n_i = \lceil -\log_2(p_i) \rceil$$
 
 Next, calculate the cumulative probabilities:
 
-\[
-q_1=0
-\]
+$$q_1 = 0$$
 
-\[
-q_i=\sum_{j=1}^{i-1}p_j
-\]
+$$q_i = \sum_{j=1}^{i-1} p_j$$
 
-The cumulative probability \(q_i\) is then converted into a binary fractional representation.
-
-At each conversion step, multiply the fractional value by 2. The integer part gives the next binary digit, and the remaining fractional part is used in the next iteration.
-
-The process continues until \(n_i\) bits have been generated.
-
-The application displays the cumulative probability, codeword length calculation, binary conversion steps, and resulting codeword.
+The cumulative probability $q_i$ is then converted into a binary fractional representation through repeated multiplication by 2.
 
 ### 4. Gilbert-Moore Coding
 
@@ -246,23 +188,13 @@ The Gilbert-Moore algorithm uses the midpoint of each symbol's probability inter
 
 For each symbol, calculate:
 
-\[
-q_i=\sum_{j=1}^{i-1}p_j+\frac{p_i}{2}
-\]
+$$q_i = \sum_{j=1}^{i-1} p_j + \frac{p_i}{2}$$
 
 The codeword length is calculated as:
 
-\[
-n_i=\left\lceil-\log_2(p_i)\right\rceil+1
-\]
+$$n_i = \lceil -\log_2(p_i) \rceil + 1$$
 
-The value \(q_i\) is converted into a binary fractional representation using repeated multiplication by 2.
-
-The resulting codewords follow the order of the supplied symbols and are generated using the midpoint cumulative probability.
-
-The application displays the midpoint calculation, codeword length, binary conversion steps, and generated codeword.
-
-**Note:** The implementation processes symbols in their input order for Shannon binary and Gilbert-Moore coding. The input order therefore determines the cumulative probability intervals used by these algorithms.
+The value $q_i$ is converted into a binary fractional representation using repeated multiplication by 2.
 
 ---
 
@@ -277,20 +209,6 @@ The application follows an object-oriented design and uses Java Swing for the gr
 | `Node` | Represents a tree node or leaf, including its probability, children, graphical coordinates, and leaf status. Implements recursive deep copying through `makeCopy()`. |
 | `VisualLine` | Stores the coordinates and label of a graphical edge connecting two tree nodes. |
 | `GraphicsPanel` | Custom Swing panel that renders the coding trees and codeword blocks. Supports zooming, panning, and anti-aliased drawing. |
-
-### State Management and Visualization
-
-The application stores intermediate visualization states in separate lists:
-
-- `stepNodesToDraw` stores node snapshots for each step.
-- `stepLinesToDraw` stores the graphical edges for each step.
-- `stepMathTexts` stores the mathematical explanation associated with each step.
-- `currentStepIndex` tracks the currently displayed step.
-- `processedSymbols` stores the source symbols and their generated codewords.
-
-The `Node.makeCopy()` method recursively copies tree nodes and their children. This allows the application to preserve earlier tree states while the algorithm continues to execute.
-
-The `displayStep()` and `navigateStep()` methods update the visualization, mathematical explanation, results table, and navigation controls.
 
 ---
 
@@ -308,8 +226,6 @@ Recursive top-down partitioning of source symbols into groups with approximately
 
 <img width="1366" height="768" alt="Shannon-Fano partitioning steps" src="https://github.com/user-attachments/assets/5d871438-ca84-47aa-b4cf-1ab21ac51163" />
 
-<!-- Add additional Shannon-Fano screenshots here if needed. -->
-
 <img width="1366" height="768" alt="Shannon-Fano final visualization" src="https://github.com/user-attachments/assets/5ce2f9e2-2f36-49a4-9c9e-57026f8231eb" />
 
 ### 2. Huffman Algorithm Visualization
@@ -324,8 +240,6 @@ Bottom-up construction of a Huffman coding tree through repeated merging of the 
 
 <img width="1366" height="768" alt="Huffman tree construction" src="https://github.com/user-attachments/assets/4f200b37-4e28-4215-99d5-0fc4b78e730f" />
 
-<!-- Add additional Huffman screenshots here if needed. -->
-
 <img width="1366" height="768" alt="Huffman final visualization" src="https://github.com/user-attachments/assets/63679027-3c29-48e6-8fed-c59b109d6bb2" />
 
 ### 3. Shannon Binary Code Visualization
@@ -336,8 +250,6 @@ Cumulative probability calculations and binary fractional conversion for individ
 
 <img width="1366" height="768" alt="Shannon binary code conversion" src="https://github.com/user-attachments/assets/c52eb9b2-3fcf-4ea1-9e62-5d4af433dac1" />
 
-<!-- Add additional Shannon binary screenshots here if needed. -->
-
 <img width="1366" height="768" alt="Shannon binary code final visualization" src="https://github.com/user-attachments/assets/b33384b9-d574-421b-bf6d-db7d6ca15aaa" />
 
 ### 4. Gilbert-Moore Code Visualization
@@ -347,8 +259,6 @@ Midpoint cumulative probability calculations and binary codeword generation.
 <img width="1366" height="768" alt="Gilbert-Moore code calculation" src="https://github.com/user-attachments/assets/5764b817-f9d3-4f52-b231-be8b53cdaebb" />
 
 <img width="1366" height="768" alt="Gilbert-Moore binary conversion" src="https://github.com/user-attachments/assets/2ad21e21-9dea-457f-8552-b8c7b9ffca04" />
-
-<!-- Add additional Gilbert-Moore screenshots here if needed. -->
 
 <img width="1366" height="768" alt="Gilbert-Moore final visualization" src="https://github.com/user-attachments/assets/a022dc9e-dc42-416f-b492-c489a1bb2ee3" />
 
@@ -364,47 +274,24 @@ Midpoint cumulative probability calculations and binary codeword generation.
 
 ### 1. Clone the Repository
 
-Open a terminal or command prompt and execute:
-
 ```bash
-git clone https://github.com/StefanieF2004/InformationTheory-Visualizer.git
-```
-
-Navigate to the project directory:
+git clone [https://github.com/StefanieF2004/InformationTheory-Visualizer.git](https://github.com/StefanieF2004/InformationTheory-Visualizer.git)
 
 ```bash
 cd InformationTheory-Visualizer
-```
+``
 
 ### 2. Compile the Application
-
-Make sure that `App_za_KODOVI.java` is located in the current directory, then run:
 
 ```bash
 javac App_za_KODOVI.java
 ```
 
-If compilation succeeds, Java will generate the required `.class` files.
-
 ### 3. Run the Application
-
-Execute the following command:
 
 ```bash
 java App_za_KODOVI
 ```
-
-The graphical application window should open.
-
-### Running from an IDE
-
-Alternatively, you can run the project using an IDE such as IntelliJ IDEA, Eclipse, or NetBeans.
-
-1. Open the project or create a Java project.
-2. Add `App_za_KODOVI.java` to the source directory.
-3. Ensure that the configured JDK is version 8 or newer.
-4. Run the `main()` method in `App_za_KODOVI`.
-
 ---
 
 ## Technologies Used
@@ -418,31 +305,10 @@ Alternatively, you can run the project using an IDE such as IntelliJ IDEA, Eclip
 
 ---
 
-## Project Purpose
-
-This application is intended for educational purposes, particularly for students studying Information Theory, Data Compression, and Coding Theory.
-
-By combining algorithm execution, mathematical explanations, and interactive graphical visualization, the project helps users understand the construction and evaluation of source coding algorithms.
-
----
-
-
 ## Copyright and Attribution
 
 Copyright © 2026 StefanieF2004. All rights reserved.
 
-This project is an original work developed for educational purposes as part of the study of Information Theory and Source Coding Algorithms.
-
-The source code, documentation, and visualizations are the intellectual work of the author.
-
-You may reference this project for educational, research, or informational purposes, provided that proper credit is given to the original author and a link to the original repository is included.
-
-If you use, share, or adapt any part of this project, please provide clear attribution to the original author and include the following reference:
-
 **Author:** StefanieF2004  
 **Project:** InformationTheory-Visualizer  
 **Repository:** https://github.com/StefanieF2004/InformationTheory-Visualizer
-
-Reproducing, redistributing, or modifying this project does not transfer ownership of the original work to others.
-
-All rights not expressly granted are reserved by the author.
