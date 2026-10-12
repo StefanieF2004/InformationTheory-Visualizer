@@ -2,17 +2,7 @@
 
 An interactive, desktop-based educational Java application designed to visualize, step through, and evaluate fundamental source coding algorithms in Information Theory and Coding.
 
----
 
-##  Table of Contents
-1. [Overview](#-overview)
-2. [Key Features](#-key-features)
-3. [Theoretical Background & Mathematical Formulations](#-theoretical-background--mathematical-formulations)
-4. [Supported Coding Algorithms](#-supported-coding-algorithms)
-5. [Software Architecture & Core Classes](#-software-architecture--core-classes)
-6. [User Interface & Visual Demonstrations](#-user-interface--visual-demonstrations)
-7. [Installation & Execution](#-installation--execution)
-8. [Author & Academic Context](#-author--academic-context)
 
 ---
 
