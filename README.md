@@ -276,10 +276,11 @@ Midpoint cumulative probability calculations and binary codeword generation.
 
 ```bash
 git clone [https://github.com/StefanieF2004/InformationTheory-Visualizer.git](https://github.com/StefanieF2004/InformationTheory-Visualizer.git)
+```
 
 ```bash
 cd InformationTheory-Visualizer
-``
+```
 
 ### 2. Compile the Application
 
